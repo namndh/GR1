@@ -4,7 +4,7 @@ import os
 from matplotlib import pyplot as plt
 
 
-print(cv2.__version__)
+# print(cv2.__version__)
 IMGS_PATH = '/home/t3min4l/workspace/GR/basic_imageProcessing/images'
 
 img2_path = os.path.join(IMGS_PATH, '2_resized.jpg')
