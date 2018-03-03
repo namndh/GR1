@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 
 # Paths
 IMGS_PATH = '/home/t3min4l/workspace/GR/basic_imageProcessing/images'
+FIGURE_PATH = '/home/t3min4l/workspace/GR/basic_imageProcessing/figures'
 
 img1_path = os.path.join(IMGS_PATH, '2.jpg')
 img1_resized_path = os.path.join(IMGS_PATH, '2_resized.jpg')
@@ -40,15 +41,24 @@ def display(images, titles=['']):
         if i < c:
             plt.title(title)
     plt.tight_layout()
-    plt.show()
+
+
+
+# save_fig
+def save_fig(fig_id, tight_layout = False, fig_extension = 'png', resolution=300):
+    path = os.path.join(FIGURE_PATH, fig_id + '.' + fig_extension)
+    print('Saving figure', fig_id)
+    if tight_layout:
+        plt.tight_layout()
+    plt.savefig(path, format=fig_extension, dpi=resolution)
+
 
 # Downsampling
-
 img = cv2.imread(img1_path)
 res = cv2.resize(img, None, fx=0.3, fy=0.3, interpolation=cv2.INTER_AREA)
 cv2.imwrite(img1_resized_path, res)
 
-# Comparision interpolations
+# Comparison interpolations
 bullet = cv2.imread(bullet_path)
 coffee_bean = cv2.imread(coffeeBean_path)
 rice = cv2.imread(rice_path)
@@ -79,12 +89,16 @@ imgs_set = [[cv2.resize(im, (400,400), interpolation=m[1]) for m in methods] for
 imgs_set = [[ima, ]+imb for ima, imb in zip(imgs_50, imgs_set)]
 names = ["original 50x50",] + [m[0] + "400x400" for m in methods]
 display(imgs_set, names)
-
+save_fig('Up-sampling comparison')
+plt.show()
 # downsampling
 imgs_set1 = [[cv2.resize(im, (50, 50), interpolation=m[1]) for m in methods] for im in imgs_400]
 imgs_set1 = [[ima, ]+imb for ima, imb in zip(imgs_400, imgs_set1)]
 names1 = ["original 400x400", ] + [m[0] + "50x50" for m in methods]
 display(imgs_set1, names1)
+save_fig('Down-sampling comparison')
+plt.show()
+
 
 # time
 n=20
@@ -112,4 +126,5 @@ plt.xlabel("scale factor")
 plt.ylabel("ave time (sec)")
 plt.title("speed comparison")
 plt.grid(which="both")
+save_fig('Timing comparison')
 plt.show()
