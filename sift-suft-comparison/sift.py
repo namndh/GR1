@@ -21,8 +21,8 @@ def save_image(img, img_id, img_extension):
     cv2.imwrite(path, img)
 
 
-img1_path = os.path.join(IMAGES_PATH, 'input_0.' + img_format)
-img2_path = os.path.join(IMAGES_PATH, 'input_1.' + img_format)
+img1_path = os.path.join(IMAGES_PATH, 'input_0.png')
+img2_path = os.path.join(IMAGES_PATH, 'input_1.png')
 
 img3_paths = []
 for angle in np.arange(0, 360, 45):
@@ -32,10 +32,23 @@ for angle in np.arange(0, 360, 45):
 
 img1 = cv2.imread(img1_path)
 img2 = cv2.imread(img2_path)
-img3 = cv2.imread(img3_paths[0])
+
+img3_original = cv2.imread(img3_paths[0])
+img3_rotated = []
+for i in range(1,len(img3_paths)):
+    img = cv2.imread(img3_paths[i])
+    img3_rotated.append(img)
+
+
+
+
+
 sift = cv2.xfeatures2d.SIFT_create()
-kp1, des1 = sift.detectAndCompute(img1,None)
-kp2, des2 = sift.detectAndCompute(img2,None)
+
+def ViewPointVariationSIFT(img1, img2):
+    kp1, des1 = sift.detectAndCompute(img1,None)
+    kp2, des2 = sift.detectAndCompute(img2,None)
+    return kp1, des1, kp2, des2
 
 def bfMatcher(img1, kp1, des1, img2, kp2, des2):
     bf = cv2.BFMatcher()
@@ -68,3 +81,5 @@ def flannMatcher(img1, kp1, des1, img2, kp2, des2):
 
     img3 = cv2.drawMatchesKnn(img1, kp1, img2, kp2, matches, None, **draw_params)
     return img3
+
+print('Done')
