@@ -1,0 +1,133 @@
+Viewpoint Variation-SIFT
+SIFT
+Number of keypoints of img1:2058
+Number of keypoints of img2:1692
+Number of matched descriptors:2058
+Number of good matched descriptors:139
+Time eplapsed:0.15870118141174316
+Viewpoint Variation-SIFT
+SIFT
+Number of keypoints of img1:2058
+Number of keypoints of img2:1692
+Number of matched descriptors:2058
+Number of good matched descriptors:139
+Time eplapsed:0.16759109497070312
+Viewpoint Variation-SURF
+SURF
+Number of keypoints of img1:2951
+Number of keypoints of img2:2432
+Number of matched descriptors:2951
+Number of good matched descriptors:202
+Time eplapsed:0.3775770664215088
+Angle Variation-SIFT
+SIFT
+Number of keypoints of img1:1422
+Number of keypoints of img2:7107
+Number of matched descriptors:1422
+Number of good matched descriptors:518
+Time eplapsed:1.2387566566467285
+Angle Variation-SIFT
+SIFT
+Number of keypoints of img1:1422
+Number of keypoints of img2:6806
+Number of matched descriptors:1422
+Number of good matched descriptors:476
+Time eplapsed:2.2255377769470215
+Angle Variation-SIFT
+SIFT
+Number of keypoints of img1:1422
+Number of keypoints of img2:7135
+Number of matched descriptors:1422
+Number of good matched descriptors:516
+Time eplapsed:3.665907144546509
+Angle Variation-SIFT
+SIFT
+Number of keypoints of img1:1422
+Number of keypoints of img2:6840
+Number of matched descriptors:1422
+Number of good matched descriptors:481
+Time eplapsed:4.631783485412598
+Angle Variation-SIFT
+SIFT
+Number of keypoints of img1:1422
+Number of keypoints of img2:7051
+Number of matched descriptors:1422
+Number of good matched descriptors:503
+Time eplapsed:6.057581663131714
+Angle Variation-SIFT
+SIFT
+Number of keypoints of img1:1422
+Number of keypoints of img2:6805
+Number of matched descriptors:1422
+Number of good matched descriptors:474
+Time eplapsed:7.029319524765015
+Angle Variation-SIFT
+SIFT
+Number of keypoints of img1:1422
+Number of keypoints of img2:7037
+Number of matched descriptors:1422
+Number of good matched descriptors:508
+Time eplapsed:8.461812734603882
+Angle Variation-SURF 0
+SURF
+Number of keypoints of img1:2399
+Number of keypoints of img2:8601
+Number of matched descriptors:2399
+Number of good matched descriptors:296
+Time eplapsed:0.6963541507720947
+Angle Variation-SURF 1
+SURF
+Number of keypoints of img1:2399
+Number of keypoints of img2:8476
+Number of matched descriptors:2399
+Number of good matched descriptors:342
+Time eplapsed:1.5483298301696777
+Angle Variation-SURF 2
+SURF
+Number of keypoints of img1:2399
+Number of keypoints of img2:8602
+Number of matched descriptors:2399
+Number of good matched descriptors:294
+Time eplapsed:2.5054287910461426
+Angle Variation-SURF 3
+SURF
+Number of keypoints of img1:2399
+Number of keypoints of img2:8502
+Number of matched descriptors:2399
+Number of good matched descriptors:331
+Time eplapsed:3.362089157104492
+Angle Variation-SURF 4
+SURF
+Number of keypoints of img1:2399
+Number of keypoints of img2:8594
+Number of matched descriptors:2399
+Number of good matched descriptors:299
+Time eplapsed:4.309138059616089
+Angle Variation-SURF 5
+SURF
+Number of keypoints of img1:2399
+Number of keypoints of img2:8523
+Number of matched descriptors:2399
+Number of good matched descriptors:327
+Time eplapsed:5.140919923782349
+Angle Variation-SURF 6
+SURF
+Number of keypoints of img1:2399
+Number of keypoints of img2:8595
+Number of matched descriptors:2399
+Number of good matched descriptors:300
+Time eplapsed:6.085835218429565
+Noisy-SIFT
+SIFT
+Number of keypoints of img1:2410
+Number of keypoints of img2:2008
+Number of matched descriptors:2410
+Number of good matched descriptors:263
+Time eplapsed:0.1262645721435547
+Noisy-SURF
+SURF
+Number of keypoints of img1:1867
+Number of keypoints of img2:2944
+Number of matched descriptors:1867
+Number of good matched descriptors:332
+Time eplapsed:0.12541794776916504
