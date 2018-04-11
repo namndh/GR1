@@ -4,130 +4,141 @@ Number of keypoints of img1:2058
 Number of keypoints of img2:1692
 Number of matched descriptors:2058
 Number of good matched descriptors:139
-Time eplapsed:0.15870118141174316
-Viewpoint Variation-SIFT
-SIFT
-Number of keypoints of img1:2058
-Number of keypoints of img2:1692
-Number of matched descriptors:2058
-Number of good matched descriptors:139
-Time eplapsed:0.16759109497070312
+Algo time eplapsed in:0.12633824348449707
+Matcher time elapsed in:0.031229257583618164
 Viewpoint Variation-SURF
 SURF
 Number of keypoints of img1:2951
 Number of keypoints of img2:2432
 Number of matched descriptors:2951
 Number of good matched descriptors:202
-Time eplapsed:0.3775770664215088
-Angle Variation-SIFT
+Algo time eplapsed in:0.2493574619293213
+Matcher time elapsed in:0.03306221961975098
+1,Angle Variation-SIFT
 SIFT
 Number of keypoints of img1:1422
 Number of keypoints of img2:7107
 Number of matched descriptors:1422
 Number of good matched descriptors:518
-Time eplapsed:1.2387566566467285
-Angle Variation-SIFT
+Algo time eplapsed in:1.0593338012695312
+Matcher time elapsed in:0.09068417549133301
+2,Angle Variation-SIFT
 SIFT
 Number of keypoints of img1:1422
 Number of keypoints of img2:6806
 Number of matched descriptors:1422
 Number of good matched descriptors:476
-Time eplapsed:2.2255377769470215
-Angle Variation-SIFT
+Algo time eplapsed in:0.5620927810668945
+Matcher time elapsed in:0.09392046928405762
+3,Angle Variation-SIFT
 SIFT
 Number of keypoints of img1:1422
 Number of keypoints of img2:7135
 Number of matched descriptors:1422
 Number of good matched descriptors:516
-Time eplapsed:3.665907144546509
-Angle Variation-SIFT
+Algo time eplapsed in:1.040846347808838
+Matcher time elapsed in:0.09097528457641602
+4,Angle Variation-SIFT
 SIFT
 Number of keypoints of img1:1422
 Number of keypoints of img2:6840
 Number of matched descriptors:1422
 Number of good matched descriptors:481
-Time eplapsed:4.631783485412598
-Angle Variation-SIFT
+Algo time eplapsed in:0.5484879016876221
+Matcher time elapsed in:0.09373044967651367
+5,Angle Variation-SIFT
 SIFT
 Number of keypoints of img1:1422
 Number of keypoints of img2:7051
 Number of matched descriptors:1422
 Number of good matched descriptors:503
-Time eplapsed:6.057581663131714
-Angle Variation-SIFT
+Algo time eplapsed in:1.0600359439849854
+Matcher time elapsed in:0.08997821807861328
+6,Angle Variation-SIFT
 SIFT
 Number of keypoints of img1:1422
 Number of keypoints of img2:6805
 Number of matched descriptors:1422
 Number of good matched descriptors:474
-Time eplapsed:7.029319524765015
-Angle Variation-SIFT
+Algo time eplapsed in:0.5684554576873779
+Matcher time elapsed in:0.09350275993347168
+7,Angle Variation-SIFT
 SIFT
 Number of keypoints of img1:1422
 Number of keypoints of img2:7037
 Number of matched descriptors:1422
 Number of good matched descriptors:508
-Time eplapsed:8.461812734603882
-Angle Variation-SURF 0
+Algo time eplapsed in:1.0561959743499756
+Matcher time elapsed in:0.08961057662963867
+1,Angle Variation-SURF
 SURF
 Number of keypoints of img1:2399
 Number of keypoints of img2:8601
 Number of matched descriptors:2399
 Number of good matched descriptors:296
-Time eplapsed:0.6963541507720947
-Angle Variation-SURF 1
+Algo time eplapsed in:0.5371999740600586
+Matcher time elapsed in:0.10016179084777832
+2,Angle Variation-SURF
 SURF
 Number of keypoints of img1:2399
 Number of keypoints of img2:8476
 Number of matched descriptors:2399
 Number of good matched descriptors:342
-Time eplapsed:1.5483298301696777
-Angle Variation-SURF 2
+Algo time eplapsed in:0.4344749450683594
+Matcher time elapsed in:0.09869742393493652
+3,Angle Variation-SURF
 SURF
 Number of keypoints of img1:2399
 Number of keypoints of img2:8602
 Number of matched descriptors:2399
 Number of good matched descriptors:294
-Time eplapsed:2.5054287910461426
-Angle Variation-SURF 3
+Algo time eplapsed in:0.5502872467041016
+Matcher time elapsed in:0.09288644790649414
+4,Angle Variation-SURF
 SURF
 Number of keypoints of img1:2399
 Number of keypoints of img2:8502
 Number of matched descriptors:2399
 Number of good matched descriptors:331
-Time eplapsed:3.362089157104492
-Angle Variation-SURF 4
+Algo time eplapsed in:0.4335625171661377
+Matcher time elapsed in:0.09637880325317383
+5,Angle Variation-SURF
 SURF
 Number of keypoints of img1:2399
 Number of keypoints of img2:8594
 Number of matched descriptors:2399
 Number of good matched descriptors:299
-Time eplapsed:4.309138059616089
-Angle Variation-SURF 5
+Algo time eplapsed in:0.5539438724517822
+Matcher time elapsed in:0.10219907760620117
+6,Angle Variation-SURF
 SURF
 Number of keypoints of img1:2399
 Number of keypoints of img2:8523
 Number of matched descriptors:2399
 Number of good matched descriptors:327
-Time eplapsed:5.140919923782349
-Angle Variation-SURF 6
+Algo time eplapsed in:0.45102477073669434
+Matcher time elapsed in:0.09958934783935547
+7,Angle Variation-SURF
 SURF
 Number of keypoints of img1:2399
 Number of keypoints of img2:8595
 Number of matched descriptors:2399
 Number of good matched descriptors:300
-Time eplapsed:6.085835218429565
+Algo time eplapsed in:0.5435914993286133
+Matcher time elapsed in:0.1011502742767334
 Noisy-SIFT
 SIFT
 Number of keypoints of img1:2410
 Number of keypoints of img2:2008
 Number of matched descriptors:2410
 Number of good matched descriptors:263
-Time eplapsed:0.1262645721435547
+Algo time eplapsed in:0.08124423027038574
+Matcher time elapsed in:0.043621063232421875
 Noisy-SURF
 SURF
 Number of keypoints of img1:1867
 Number of keypoints of img2:2944
 Number of matched descriptors:1867
 Number of good matched descriptors:332
-Time eplapsed:0.12541794776916504
+Algo time eplapsed in:0.10893106460571289
+Matcher time elapsed in:0.030822277069091797

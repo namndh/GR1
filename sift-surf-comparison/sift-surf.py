@@ -46,17 +46,19 @@ def save_image(img, img_id, img_extension):
     cv2.imwrite(path, img)
 
 def bfMatcher(img1, kp1, des1, img2, kp2, des2):
+    start_time = time.time()
     bf = cv2.BFMatcher(cv2.NORM_L2)
     matches = bf.knnMatch(des1,des2, k=2)
     good = []
     for m, n in matches:
         if m.distance < 0.8*n.distance:
             good.append([m])
-
+    elapsedTime = time.time() - start_time
     img3 = cv2.drawMatchesKnn(img1, kp1, img2, kp2, good,None, flags=2)
-    return img3, matches, good
+    return img3, matches, good, elapsedTime
 
 def flannMatcher(img1, kp1, des1, img2, kp2, des2):
+    start_time = time.time()
     FLANN_INDEX_KDTREE = 1
     index_params = dict(algorithm = FLANN_INDEX_KDTREE, trees = 5)
     search_params = dict(checks=50)
@@ -72,11 +74,11 @@ def flannMatcher(img1, kp1, des1, img2, kp2, des2):
     draw_params = dict(singlePointColor=(255,0,0),
                         matchesMask=matchesMask,
                         flags=0)
-
+    elapsed_time = time.time() - start_time
     img3 = cv2.drawMatchesKnn(img1, kp1, img2, kp2, matches, None, **draw_params)
-    return img3, matches
+    return img3, matches, elapsed_time
 
-def writeToLog(f_in,algo, _id, kp1, des1, kp2, des2, matches, good, time):
+def writeToLog(f_in,algo, _id, kp1, des1, kp2, des2, matches, good, algo_elapsed_time, matcher_elapsed_time):
     f_in.write(_id + '\n')
     f_in.write(algo.upper() + '\n')
     f_in.write('Number of keypoints of img1:{}\n'.format(len(kp1)))
@@ -84,7 +86,8 @@ def writeToLog(f_in,algo, _id, kp1, des1, kp2, des2, matches, good, time):
     f_in.write('Number of matched descriptors:{}\n'.format(len(matches)))
     if good:
         f_in.write('Number of good matched descriptors:{}\n'.format(len(good)))
-    f_in.write('Time eplapsed:{}\n'.format(time))
+    f_in.write('Algo time eplapsed in:{}\n'.format(algo_elapsed_time))
+    f_in.write('Matcher time elapsed in:{}\n'.format(matcher_elapsed_time))
 
 sift = cv2.xfeatures2d.SIFT_create()
 surf = cv2.xfeatures2d.SURF_create()
@@ -102,36 +105,40 @@ def SURF(img1, img2):
 
 
 def SingleComparision(img1, img2, algo, img_id, f_input):
-    start_time = time.time()
+    
 
     if algo == 'sift':
+        start_time = time.time()
         kp1, des1, kp2, des2 = SIFT(img1, img2)
+        algo_elapsed_time = time.time() - start_time
     elif algo == 'surf':
+        start_time = time.time()
         kp1, des1, kp2, des2 = SURF(img1, img2)
-    
-    result, matches, good = bfMatcher(img1, kp1, des1, img2, kp2, des2)
-    elapsedTime = time.time() - start_time
+        algo_elapsed_time = time.time() - start_time
+
+    result, matches, good, matcher_elapsed_time = bfMatcher(img1, kp1, des1, img2, kp2, des2)
     save_image(result, img_id, 'png')
-    writeToLog(f_input, algo, img_id, kp1, des1, kp2, des2, matches,good, elapsedTime)
+    writeToLog(f_input, algo, img_id, kp1, des1, kp2, des2, matches,good, algo_elapsed_time, matcher_elapsed_time)
 
 
 def MultipleComparision(img1, img_list, algo, img_id, f_input):
-    start_time = time.time()
 
     if algo == 'sift':
         for i in range(len(img_list)):
+            algo_start_time = time.time()
             kp1, des1, kp2, des2 = SIFT(img1, img_list[i])
-            result, matches, good = bfMatcher(img, kp1, des1, img_list[i], kp2, des2)
-            elapsedTime = time.time() - start_time
+            algo_elapsed_time = time.time() - algo_start_time
+            result, matches, good, matcher_elapsed_time = bfMatcher(img1, kp1, des1, img_list[i], kp2, des2)
             save_image(result, img_id + ' ' + str(i), 'png')
-            writeToLog(f_input, algo, img_id, kp1, des1, kp2, des2, matches, good, elapsedTime)
+            writeToLog(f_input, algo, img_id, kp1, des1, kp2, des2, matches, good, algo_elapsed_time, matcher_elapsed_time)
     if algo == 'surf':
         for i in range(len(img_list)):        
+            algo_start_time = time.time()
             kp1, des1, kp2, des2 = SURF(img1, img_list[i])
-            result, matches, good = bfMatcher(img, kp1, des1, img_list[i], kp2, des2)
-            elapsedTime = time.time() - start_time
+            algo_elapsed_time = time.time() - algo_start_time
+            result, matches, good, matcher_elapsed_time = bfMatcher(img1, kp1, des1, img_list[i], kp2, des2)
             save_image(result, img_id + ' ' + str(i), 'png')
-            writeToLog(f_input, algo, img_id + ' ' + str(i), kp1, des1, kp2, des2, matches, good, elapsedTime)            
+            writeToLog(f_input, algo, img_id, kp1, des1, kp2, des2, matches, good, algo_elapsed_time, matcher_elapsed_time)  
 
 
 # Viewpoint Variation
@@ -139,7 +146,7 @@ SingleComparision(img1, img2, 'sift', 'Viewpoint Variation-SIFT', log_file)
 SingleComparision(img1, img2, 'surf', 'Viewpoint Variation-SURF', log_file)
 
 # Angle Variation
-MultipleComparision(img4,img5_rotated, 'sift','Angle Variation-SIFT', log_file)
+MultipleComparision(img4, img5_rotated, 'sift','Angle Variation-SIFT', log_file)
 MultipleComparision(img4, img5_rotated, 'surf', 'Angle Variation-SURF', log_file)
 
 
