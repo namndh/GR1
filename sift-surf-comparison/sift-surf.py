@@ -9,28 +9,36 @@ IMAGES_PATH = '/home/t3min4l/workspace/GR/sift-surf-comparison/images'
 FIGURES_PATH = '/home/t3min4l/workspace/GR/sift-surf-comparison/figures'
 LOG_PATH = '/home/t3min4l/workspace/GR/sift-surf-comparison/log.txt'
 
+MIN_MATCH_COUNT = 10
+
 
 img1_path = os.path.join(IMAGES_PATH, 'input_0.png')
 img2_path = os.path.join(IMAGES_PATH, 'input_1.png')
 img4_path = os.path.join(IMAGES_PATH, 'input_4.png')
 
-img3_original_path = os.path.join(IMAGES_PATH, 'input_2.png')
-img3_noisy_path = os.path.join(IMAGES_PATH, 'input_2_noiseSP.png')
+img3_original_path = os.path.join(IMAGES_PATH, 'input_4.png')
+img3_noisy_path = os.path.join(IMAGES_PATH, 'input_5_noiseSP.png')
 
 img5_paths = []
 for angle in np.arange(0, 360, 45):
     path = os.path.join(IMAGES_PATH, 'input_5_' + str(angle) + '.png' )
     img5_paths.append(path)
 img1 = cv2.imread(img1_path)
+img1 = cv2.cvtColor(img1, cv2.COLOR_BGR2GRAY)
 img2 = cv2.imread(img2_path)
+img2 = cv2.cvtColor(img2, cv2.COLOR_RGB2GRAY)
 img3_original = cv2.imread(img3_original_path)
+img3_original = cv2.cvtColor(img3_original, cv2.COLOR_BGR2GRAY)
 img3_noisy = cv2.imread(img3_noisy_path)
+img3_noisy = cv2.cvtColor(img3_noisy, cv2.COLOR_RGB2GRAY)
 img4 = cv2.imread(img4_path)
-
+img4 = cv2.cvtColor(img4, cv2.COLOR_RGB2GRAY)
 img5_original = cv2.imread(img5_paths[0])
+img5_original = cv2.cvtColor(img5_original, cv2.COLOR_RGB2GRAY)
 img5_rotated = []
 for i in range(1,len(img5_paths)):
     img = cv2.imread(img5_paths[i])
+    img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
     img5_rotated.append(img)
 
 def save_fig(fig_id, tigh_layout = True, fig_extension = 'png', resolution = 300):
@@ -45,6 +53,26 @@ def save_image(img, img_id, img_extension):
     print('Saving image', img_id)
     cv2.imwrite(path, img)
 
+def get_object_match(img1, kp1, img2, kp2, good):
+    if len(good) > MIN_MATCH_COUNT:
+        src_pts = np.float32([kp1[m.queryIdx].pt for m in good]).reshape(-1,1,2)
+        dst_pts = np.float32([kp2[m.trainIdx].pt for m in good]).reshape(-1,1,2)
+
+        M, mask = cv2.findHomography(src_pts, dst_pts, cv2.RANSAC, 5.0)
+        matchesMask = mask.ravel().tolist()
+
+        h = img1.shape[0]
+        w = img1.shape[1]
+        
+        pts = np.float32([ [0,0], [0, h-1], [w-1, h-1], [w-1, 0]]).reshape(-1,1,2)
+        dst = cv2.perspectiveTransform(pts, M)
+        img2 = cv2.polylines(img2, [np.int32(dst)], True, 255, 2, cv2.LINE_AA)
+
+        return img2, matchesMask
+    else:
+        matchesMask = None
+        return img2, matchesMask
+
 def bfMatcher(img1, kp1, des1, img2, kp2, des2):
     start_time = time.time()
     bf = cv2.BFMatcher(cv2.NORM_L2)
@@ -52,9 +80,12 @@ def bfMatcher(img1, kp1, des1, img2, kp2, des2):
     good = []
     for m, n in matches:
         if m.distance < 0.8*n.distance:
-            good.append([m])
+            good.append(m)
+    print(len(good))
     elapsedTime = time.time() - start_time
-    img3 = cv2.drawMatchesKnn(img1, kp1, img2, kp2, good,None, flags=2)
+    img2, matches_mask = get_object_match(img1, kp1, img2, kp2, good)
+    draw_params = dict(matchesMask = matches_mask, flags = 2)
+    img3 = cv2.drawMatches(img1, kp1, img2, kp2, good,None, **draw_params)
     return img3, matches, good, elapsedTime
 
 def flannMatcher(img1, kp1, des1, img2, kp2, des2):
@@ -130,7 +161,7 @@ def MultipleComparision(img1, img_list, algo, img_id, f_input):
             algo_elapsed_time = time.time() - algo_start_time
             result, matches, good, matcher_elapsed_time = bfMatcher(img1, kp1, des1, img_list[i], kp2, des2)
             save_image(result, img_id + ' ' + str(i), 'png')
-            writeToLog(f_input, algo, img_id, kp1, des1, kp2, des2, matches, good, algo_elapsed_time, matcher_elapsed_time)
+            writeToLog(f_input, algo, img_id + ' ' + str(i), kp1, des1, kp2, des2, matches, good, algo_elapsed_time, matcher_elapsed_time)
     if algo == 'surf':
         for i in range(len(img_list)):        
             algo_start_time = time.time()
@@ -138,7 +169,7 @@ def MultipleComparision(img1, img_list, algo, img_id, f_input):
             algo_elapsed_time = time.time() - algo_start_time
             result, matches, good, matcher_elapsed_time = bfMatcher(img1, kp1, des1, img_list[i], kp2, des2)
             save_image(result, img_id + ' ' + str(i), 'png')
-            writeToLog(f_input, algo, img_id, kp1, des1, kp2, des2, matches, good, algo_elapsed_time, matcher_elapsed_time)  
+            writeToLog(f_input, algo, img_id + ' ' + str(i), kp1, des1, kp2, des2, matches, good, algo_elapsed_time, matcher_elapsed_time)  
 
 
 # Viewpoint Variation

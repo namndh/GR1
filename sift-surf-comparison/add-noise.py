@@ -3,7 +3,7 @@ import cv2
 import matplotlib.pyplot as plt 
 import numpy as np 
 
-IMAGES_PATH = '/home/t3min4l/workspace/GR/sift-suft-comparison/images'
+IMAGES_PATH = '/home/t3min4l/workspace/GR/sift-surf-comparison/images'
 
 def noisy(noisy_type, img):
     if noisy_type == 'gauss':
@@ -18,7 +18,7 @@ def noisy(noisy_type, img):
     elif noisy_type == 's&p':
         row, col, ch = img.shape
         s_p = 0.5 
-        amount = 0.05
+        amount = 0.1
         out = np.copy(img)
 
         num_salt = np.ceil(amount * img.size * s_p)
@@ -35,7 +35,7 @@ def noisy(noisy_type, img):
         print('Invalid noisy type!')
         return 0
 
-img_path = os.path.join(IMAGES_PATH, 'input_2.png')
+img_path = os.path.join(IMAGES_PATH, 'input_5.png')
 img = cv2.imread(img_path)
 
 spNoise_image = noisy('s&p', img)
@@ -43,7 +43,7 @@ spNoise_image = cv2.cvtColor(spNoise_image, cv2.COLOR_RGB2GRAY)
 cv2.imshow('spNoise', spNoise_image)
 cv2.waitKey(1000)
 cv2.destroyAllWindows()
-spNoise_img_path = os.path.join(IMAGES_PATH, 'input_2_noiseSP.png')
+spNoise_img_path = os.path.join(IMAGES_PATH, 'input_5_noiseSP.png')
 
 # cv2.imshow('spNoise', spNoise_image)
 # cv2.waitKey(10000)
