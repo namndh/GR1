@@ -1,4 +1,4 @@
 {
-    "python.pythonPath": "${workspaceFolder}/env/bin/python",
+    "python.pythonPath": "/home/t3min4l/anaconda3/envs/opencv/bin/python",
     "python.linting.pylintEnabled": false
 }
