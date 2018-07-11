@@ -17,6 +17,7 @@ img_ids = ['output1_gray', 'output2_gray', 'output3_gray']
 
 def save_fig(fig_id, tight_layout=True, fig_extension='png', dpi=300):
 	path = os.path.join(IMAGES_PATH, fig_id + '.' + fig_extension)
+	print('Saving:%s' % fig_id)
 	if tight_layout:
 		plt.tight_layout()
 	plt.savefig(path, format=fig_extension, dpi=dpi)
@@ -52,26 +53,41 @@ blurred = cv2.GaussianBlur(grayscaled, (3,3), 0)
 # plt.show()
 retval2,th = cv2.threshold(blurred,150,150,cv2.THRESH_BINARY)
 plt.imshow(th, cmap='gray')
+save_fig('binary')
 plt.show()
 
 
 # plt.imshow(blurred, cmap='gray')
 # plt.show()
-# edged = auto_canny(blurred)
-# edged = cv2.Canny(blurred, 10, 200)
-# edged = cv2.Canny(blurred, 100, 255)
-sobelx = cv2.Sobel(blurred,cv2.CV_64F,1,0,ksize=5)
-sobely = cv2.Sobel(blurred,cv2.CV_64F,0,1,ksize=5)
-laplacian = cv2.Laplacian(blurred, cv2.CV_64F)
-laplacian_blurred = cv2.GaussianBlur(laplacian, (3,3), 0)
+edged_auto = auto_canny(blurred)
+edged_ez = cv2.Canny(blurred, 10, 200)
+edged_tight = cv2.Canny(blurred, 225, 250)
 
-# plt.subplot(311)
-# plt.imshow(laplacian_blurred, cmap='gray')
-# plt.subplot(312)
+
+# sobelx = cv2.Sobel(blurred,cv2.CV_64F,1,0,ksize=5)
 # plt.imshow(sobelx, cmap='gray')
-# plt.subplot(313)
-# plt.imshow(cv2.GaussianBlur(sobely, (3,3),0), cmap='gray')
-# plt.show()
+# save_fig('sobelx')
+# sobely = cv2.Sobel(blurred,cv2.CV_64F,0,1,ksize=5)
+# plt.imshow(sobely, cmap='gray')
+# save_fig('sobely')
+# laplacian = cv2.Laplacian(blurred, cv2.CV_64F)
+# plt.imshow(laplacian, cmap='gray')
+# save_fig('laplacian')
+# laplacian_blurred = cv2.GaussianBlur(laplacian, (3,3), 0)
+
+fig = plt.figure(figsize=(8,10))
+
+ax1 = fig.add_subplot(311)
+plt.imshow(edged_auto, cmap='gray')
+ax1.set_title('Auto threshold')
+ax2 = fig.add_subplot(312)
+plt.imshow(edged_ez, cmap='gray')
+ax2.set_title('Wide threshold')
+ax3 = fig.add_subplot(313)
+plt.imshow(edged_tight, cmap='gray')
+ax3.set_title('Tight threshold')
+save_fig('Multi thresholds Canny')
+plt.show()
 
 # plt.close('all')
 
@@ -98,4 +114,5 @@ for c in cnt:
 
 # cv2.drawContours(blurred, contours, -1, (0, 255, 0), 5)
 plt.imshow(blurred, cmap='gray')
+save_fig('contoures with centroids')
 plt.show()
