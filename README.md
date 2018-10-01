@@ -1,2 +1,2 @@
-# Graduation Reasearch in Object Detection Topic
+# Graduation Reasearch
 ## Working with Python and OpenCV
